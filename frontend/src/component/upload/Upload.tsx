@@ -59,12 +59,32 @@ const Upload = () => {
 
     }
     const uploadImage=async(base64EncodedImage:string|ArrayBuffer)=>{
+    let fileType= file?.type.split("/")[0];
+    let fileExt = file?.type.split("/")[1];
+    let url ;
+   
+    const timeoutDuration = 600000; // 10 minutes in milliseconds
+
+    const controller = new AbortController();
+       setTimeout(() => {
+      controller.abort();
+      }   , timeoutDuration);
+
+    if(fileType?.toLowerCase()==="video"){
+      url = "http://localhost:8000/api/upload/video"
+    }else{
+      url = "http://localhost:8000/api/upload/image"
+    }
      try {
-            await fetch('/api/upload', {
+          const res =   await fetch(url, {
                 method: 'POST',
+                  signal: controller.signal,
                 body: JSON.stringify({ data: base64EncodedImage }),
                 headers: { 'Content-Type': 'application/json' },
+                
             });
+            const data = await res.json()
+            console.log(data);
           
       
         } catch (err) {
