@@ -157,7 +157,7 @@ const Upload = () => {
       </CopyToClipboard>
   } 
       {
-        file && <img  className={styles.previewImg} height={"300px"} src={URL.createObjectURL(file)} alt="" />
+        file && <img  className={styles.previewImg}  src={URL.createObjectURL(file)} alt="" />
       } 
       
       </div>

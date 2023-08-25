@@ -86,7 +86,10 @@
     font-size: 12px;
     letter-spacing: 1px;
     color: gray;
+    width: 100%;
+    word-break: break-all;
 }
+
 .or_text{
     color: #3f51b533;
     font-weight: bold;
@@ -146,6 +149,7 @@ color: gray;
     text-align: center;
 }
 .previewImg{
+    height: 200px;
     object-fit: cover;
 }
 .copy_url{
