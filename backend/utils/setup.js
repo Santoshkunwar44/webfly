@@ -2,8 +2,8 @@ require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
     cloud_name: "onlinecoder",
-    api_key: "798386685195788",
-    api_secret: "QMSjxlsLG1vFC6jCtctCc9Zh3jU",
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET_KEY,
 });
 
 module.exports = { cloudinary };

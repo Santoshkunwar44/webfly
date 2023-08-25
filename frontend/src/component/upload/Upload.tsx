@@ -4,7 +4,7 @@ import styles from "./upload.module.css"
 import {HiOutlineClipboardCopy} from "react-icons/hi"
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useToast } from '@chakra-ui/react'
-
+import {API_KEY} from "../../utils/secret"
 const Upload = () => {
 
 
@@ -90,9 +90,9 @@ const Upload = () => {
       }   , timeoutDuration);
 
     if(fileType?.toLowerCase()==="video"){
-      url = "http://localhost:8000/api/upload/video"
+      url = `${API_KEY}/upload/video`
     }else{
-      url = "http://localhost:8000/api/upload/image"
+       url = `${API_KEY}/upload/image`
     }
      try {
           const res =   await fetch(url, {
@@ -122,7 +122,7 @@ const Upload = () => {
 
   return (
      <div className={styles.card_container} >
-
+        <h1 className={styles.header_text}>UPLOAD FILES AND GET URL</h1>
       <div className={styles.Card} onClick={handleOpen}>
         <div className={styles.draggable} > 
         {
@@ -133,7 +133,7 @@ const Upload = () => {
           :   <>
         <img className={styles.heapfileImg} src="/images/heap.png" alt="hieap" width={"130px"} />
          <h3 className={styles.drag_here_text}>Drag image file  here</h3>
-         <p className={`${styles.drag_here_text} ${styles.second_text}`}>  click to browse (4 MB max)</p>
+         <p className={`${styles.drag_here_text} ${styles.second_text}`}>  click to browse (45 MB max)</p>
          </>
         }
 

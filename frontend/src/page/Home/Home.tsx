@@ -5,6 +5,7 @@ import { HomeWrapper } from './Home.styles'
 const Home = () => {
   return (
     <HomeWrapper className='home'>
+    
      <Upload/>
      
     </HomeWrapper>
