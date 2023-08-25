@@ -12,7 +12,7 @@ const Upload = () => {
     const [file,setFile]  =useState<File|null>(null);
     const [result,setResult] =useState<string|null>(null)
     const toast = useToast()
-    const [previewSource, setPreviewSource] = useState<any>(null);
+  
     const [loading,setLoading]=useState(false)
 
 
@@ -32,7 +32,7 @@ const Upload = () => {
         fileRef.current?.click()
     }
     const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-      setPreviewSource(null)
+    
       setResult(null)
       setFile(null)
 
@@ -47,13 +47,10 @@ const Upload = () => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-          let base64Encoded = reader.result;
-          if(base64Encoded){
-            setPreviewSource(base64Encoded);
-          }
-        };
+        
     };
 
+  }
 
     const handleSubmit=(e:SyntheticEvent)=>{
 
@@ -82,7 +79,7 @@ const Upload = () => {
 
     const uploadImage=async(base64EncodedImage:string|ArrayBuffer)=>{
     let fileType= file?.type.split("/")[0];
-    let fileExt = file?.type.split("/")[1];
+    // let fileExt = file?.type.split("/")[1];
     let url ;
       setLoading(true)
     const timeoutDuration = 600000; // 10 minutes in milliseconds
