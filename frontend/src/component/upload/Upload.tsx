@@ -3,6 +3,7 @@ import {BsFillCloudCheckFill} from "react-icons/bs"
 import styles from "./upload.module.css"
 import {HiOutlineClipboardCopy} from "react-icons/hi"
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useToast } from '@chakra-ui/react'
 
 const Upload = () => {
 
@@ -10,9 +11,21 @@ const Upload = () => {
     const fileRef = useRef<HTMLInputElement|null>(null);
     const [file,setFile]  =useState<File|null>(null);
     const [result,setResult] =useState<string|null>(null)
+    const toast = useToast()
     const [previewSource, setPreviewSource] = useState<any>(null);
+    const [loading,setLoading]=useState(false)
 
 
+    const handleCopy=()=>{
+        toast({
+          title: '',
+          description: "Url copied to clipboard ",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position:"top",
+        })
+    }
 
     const handleOpen=()=>{
         if(fileRef.current)
@@ -71,7 +84,7 @@ const Upload = () => {
     let fileType= file?.type.split("/")[0];
     let fileExt = file?.type.split("/")[1];
     let url ;
-   
+      setLoading(true)
     const timeoutDuration = 600000; // 10 minutes in milliseconds
 
     const controller = new AbortController();
@@ -97,9 +110,10 @@ const Upload = () => {
               setResult(data.message)
             }
           
-          
+          setLoading(false)
       
         } catch (err) {
+          setLoading(false)
             console.error(err);
       
         }
@@ -134,12 +148,12 @@ const Upload = () => {
      
    
       
-  <button className={styles.create_variation_button} onClick={handleSubmit} > UPLOAD  </button> 
+  <button className={styles.create_variation_button} onClick={handleSubmit} > {loading?"UPLOADING":"UPLOAD"}  </button> 
         
    {
-    result &&  <CopyToClipboard  text={result}>
+    result &&  <CopyToClipboard  text={result} onCopy={handleCopy}>
       
-       <button  onClick={(e)=>e.stopPropagation()} className={styles.copy_url}>
+       <button  onClick={(e)=>e.stopPropagation()}   className={styles.copy_url}>
       <p className={styles.url_text}>{result}</p>
       <HiOutlineClipboardCopy/>
     </button>

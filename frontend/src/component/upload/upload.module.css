@@ -3,18 +3,16 @@
     width: 80%;
     display: flex;
     align-items: center;
-    height: 100%;;
-;
-    /* background-color: red; */
+    height: 100%;
     margin: auto;
 }
 
 .Card{
     padding: 1.2rem;
-   width: 40%;
-   display: flex;
-   flex-direction: column;
-   gap: 1.5rem;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     color: white;
     border-radius: 20px;
     background-color: hsla(0,2%,45%,.087);
@@ -23,6 +21,7 @@
     position: relative;
     z-index: 1;
 }
+
 .bug_image{
     position: absolute !important;
     right: -65px !important;
@@ -30,10 +29,12 @@
     top: -6% !important;
     width: 150px;
 }
+
 .cardHeader{
     display: flex;
     flex-direction: column;
 }
+
 .draggable{
 
     display: flex;
@@ -52,10 +53,8 @@
     border-color: #3f51b533;
     scale: 1.02;
 }
-/* .upload_icon{
-    color: var(--primary_text_color);
-    font-size: 2rem !important;
-} */
+
+
 .draggable svg{
     font-size: 2rem !important;
     color: var(--primary_text_color);
@@ -68,6 +67,7 @@
     align-items: center;
     gap: 10px
 }
+
 .hrline{
     flex: 1;
     height: 1px;
@@ -157,4 +157,4 @@ color: gray;
     word-wrap: break-word;
     color: gray;
     text-align: start;
-}
+} 
