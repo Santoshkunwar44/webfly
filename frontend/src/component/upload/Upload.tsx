@@ -1,14 +1,17 @@
 import  { ChangeEvent, SyntheticEvent, useRef ,useState} from 'react'
 import {BsFillCloudCheckFill} from "react-icons/bs"
 import styles from "./upload.module.css"
-
+import {HiOutlineClipboardCopy} from "react-icons/hi"
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Upload = () => {
 
 
     const fileRef = useRef<HTMLInputElement|null>(null);
     const [file,setFile]  =useState<File|null>(null);
+    const [result,setResult] =useState<string|null>(null)
     const [previewSource, setPreviewSource] = useState<any>(null);
+
 
 
     const handleOpen=()=>{
@@ -16,6 +19,10 @@ const Upload = () => {
         fileRef.current?.click()
     }
     const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
+      setPreviewSource(null)
+      setResult(null)
+      setFile(null)
+
         if(e.target.files){
             setFile(e.target.files[0])
             previewFile(e.target.files[0])
@@ -58,6 +65,8 @@ const Upload = () => {
 
 
     }
+
+
     const uploadImage=async(base64EncodedImage:string|ArrayBuffer)=>{
     let fileType= file?.type.split("/")[0];
     let fileExt = file?.type.split("/")[1];
@@ -84,7 +93,10 @@ const Upload = () => {
                 
             });
             const data = await res.json()
-            console.log(data);
+            if(res.status===200){
+              setResult(data.message)
+            }
+          
           
       
         } catch (err) {
@@ -100,7 +112,6 @@ const Upload = () => {
   return (
      <div className={styles.card_container} >
 
-      {/* <img className="bug_image" style={{zIndex:"-1"}} src="/images/bug.png" alt="hieap" /> */}
       <div className={styles.Card} onClick={handleOpen}>
         <div className={styles.draggable} > 
         {
@@ -125,8 +136,17 @@ const Upload = () => {
       
   <button className={styles.create_variation_button} onClick={handleSubmit} > UPLOAD  </button> 
         
+   {
+    result &&  <CopyToClipboard  text={result}>
+      
+       <button  onClick={(e)=>e.stopPropagation()} className={styles.copy_url}>
+      <p className={styles.url_text}>{result}</p>
+      <HiOutlineClipboardCopy/>
+    </button>
+      </CopyToClipboard>
+  } 
       {
-      file && <img  className={styles.previewImg} height={"300px"} src={URL.createObjectURL(file)} alt="" />
+        file && <img  className={styles.previewImg} height={"300px"} src={URL.createObjectURL(file)} alt="" />
       } 
       
       </div>

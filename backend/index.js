@@ -34,7 +34,7 @@ app.post('/api/upload/image', async (req, res) => {
         });
 
         console.log(uploadResponse.secure_url);
-        res.json({ msg: uploadResponse.secure_url });
+        res.json({ message: uploadResponse.secure_url });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
@@ -52,7 +52,7 @@ app.post('/api/upload/video', async (req, res) => {
              upload_preset: "vidoes",
         });
         console.log(uploadResponse.secure_url);
-        res.json({ msg: uploadResponse.secure_url });
+        res.json({ message: uploadResponse.secure_url });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
